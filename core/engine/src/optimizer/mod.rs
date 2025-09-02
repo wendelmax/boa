@@ -1,6 +1,8 @@
 //! Implements optimizations.
 
+pub mod bytecode_optimizer;
 pub(crate) mod pass;
+pub mod performance;
 pub(crate) mod walker;
 
 use self::{pass::ConstantFolding, walker::Walker};

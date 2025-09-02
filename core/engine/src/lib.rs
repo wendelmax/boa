@@ -84,13 +84,17 @@ pub use boa_parser as parser;
 
 pub mod bigint;
 pub mod builtins;
+
 pub mod bytecompiler;
 pub mod class;
 pub mod context;
 pub mod environments;
 pub mod error;
+pub mod handles;
+pub mod integration;
 pub mod interop;
 pub mod job;
+pub mod memory;
 pub mod module;
 pub mod native_function;
 pub mod object;

@@ -1,5 +1,6 @@
 //! Implements object shapes.
 
+pub mod object_shapes;
 pub(crate) mod property_table;
 mod root_shape;
 pub(crate) mod shared_shape;
@@ -25,14 +26,14 @@ use self::{
 use super::JsPrototype;
 
 /// Action to be performed after a property attribute change
-//
+
 // Example: of { get/set x() { ... }, y: ... } into { x: ..., y: ... }
-//
+
 //                 0       1       2
 //    Storage: | get x | set x |   y   |
-//
+
 // We delete at position of x which is index 0 (it spans two elements) + 1:
-//
+
 //                 0      1
 //    Storage: |   x  |   y   |
 pub(crate) enum ChangeTransitionAction {
