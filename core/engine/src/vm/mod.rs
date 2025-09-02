@@ -45,6 +45,7 @@ mod call_frame;
 mod code_block;
 mod completion_record;
 mod inline_cache;
+mod instruction_dispatcher;
 mod runtime_limits;
 
 pub(crate) mod opcode;

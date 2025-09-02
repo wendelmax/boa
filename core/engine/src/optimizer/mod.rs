@@ -1,5 +1,7 @@
 //! Implements optimizations.
 
+pub mod bytecode_optimizer;
+pub mod performance;
 pub(crate) mod pass;
 pub(crate) mod walker;
 

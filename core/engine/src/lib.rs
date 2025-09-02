@@ -84,13 +84,17 @@ pub use boa_parser as parser;
 
 pub mod bigint;
 pub mod builtins;
+
 pub mod bytecompiler;
 pub mod class;
 pub mod context;
 pub mod environments;
 pub mod error;
+pub mod handles;
+pub mod integration;
 pub mod interop;
 pub mod job;
+pub mod memory;
 pub mod module;
 pub mod native_function;
 pub mod object;
@@ -127,10 +131,10 @@ pub mod prelude {
         script::Script,
         string::{JsStr, JsString},
         symbol::JsSymbol,
-        value::{JsValue, JsVariant, js_object, js_value},
+        value::{js_object, js_value, JsValue, JsVariant},
     };
     pub use boa_gc::{Finalize, Trace};
-    pub use boa_macros::{JsData, js_str};
+    pub use boa_macros::{js_str, JsData};
     pub use boa_parser::Source;
 }
 

@@ -1,5 +1,7 @@
 //! Error-related types and conversions.
 
+pub mod error_handling;
+
 use crate::{
     Context, JsString, JsValue,
     builtins::{
