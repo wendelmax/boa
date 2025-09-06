@@ -6,7 +6,6 @@
 use std::time::{Duration, Instant};
 
 use crate::{
-    Context, JsResult, JsValue,
     error::error_handling::ErrorManager,
     handles::HandleRegistry,
     memory::{GenerationalHeap, HeapConfig},
@@ -15,6 +14,7 @@ use crate::{
         bytecode_optimizer::{BytecodeOptimizer, Instruction},
         performance::PerformanceMonitor,
     },
+    Context, JsResult, JsValue,
 };
 
 /// Main integration manager that coordinates all JetCrab improvements
@@ -186,7 +186,6 @@ impl VmIntegration {
         // Return a default value (simplified)
         Ok(JsValue::undefined())
     }
-
     /// Update execution statistics
     fn update_execution_stats(&mut self, _execution_time: Duration) {
         // Update performance improvement calculation
@@ -210,7 +209,6 @@ impl VmIntegration {
             );
         }
     }
-
     /// Get integration statistics
     pub fn get_stats(&self) -> &IntegrationStats {
         &self.stats

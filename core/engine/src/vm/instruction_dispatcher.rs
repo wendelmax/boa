@@ -23,8 +23,7 @@
 //! - **Testability**: Each handler can be tested independently
 
 use crate::{
-    Context, JsError, JsResult, error::JsNativeError, optimizer::performance::PerformanceMonitor,
-    vm::Vm,
+    error::JsNativeError, optimizer::performance::PerformanceMonitor, vm::Vm, Context, JsError, JsResult,
 };
 
 /// Trait for instruction handlers
@@ -372,9 +371,7 @@ impl InstructionDispatcher {
     }
 
     /// Get a copy of performance metrics
-    pub fn get_performance_metrics_copy(
-        &self,
-    ) -> crate::optimizer::performance::PerformanceMetrics {
+    pub fn get_performance_metrics_copy(&self) -> crate::optimizer::performance::PerformanceMetrics {
         self.performance_monitor.get_metrics_copy()
     }
 

@@ -606,12 +606,10 @@ mod tests {
     #[test]
     fn test_performance_monitor_edge_cases() {
         let mut monitor = PerformanceMonitor::new();
-
         // Test recording without starting execution
         monitor.record_instruction("Add");
         let metrics = monitor.get_metrics();
         assert_eq!(metrics.total_instructions, 0);
-
         // Test multiple start/end cycles
         monitor.start_execution();
         monitor.record_instruction("Add");
@@ -620,7 +618,6 @@ mod tests {
         monitor.start_execution();
         monitor.record_instruction("Sub");
         monitor.end_execution();
-
         let metrics = monitor.get_metrics();
         assert_eq!(metrics.total_instructions, 2);
     }
@@ -628,12 +625,10 @@ mod tests {
     #[test]
     fn test_performance_metrics_edge_cases() {
         let mut metrics = PerformanceMetrics::new();
-
         // Test with zero values
         assert_eq!(metrics.instructions_per_second(), 0.0);
         assert_eq!(metrics.memory_allocation_rate(), 0.0);
         assert_eq!(metrics.average_instruction_time(), Duration::ZERO);
-
         // Test with very small values
         metrics.total_instructions = 1;
         metrics.execution_time = Duration::from_nanos(1);
@@ -657,7 +652,6 @@ mod tests {
         analysis.memory_efficiency = 90.0;
         analysis.instruction_efficiency = 80.0;
         analysis.bottlenecks.push("Slow execution".to_string());
-
         assert_eq!(analysis.performance_score, 85.0);
         assert_eq!(analysis.memory_efficiency, 90.0);
         assert_eq!(analysis.instruction_efficiency, 80.0);
@@ -670,7 +664,6 @@ mod tests {
 
         let monitor = std::sync::Arc::new(std::sync::Mutex::new(PerformanceMonitor::new()));
         let mut handles = vec![];
-
         for i in 0..5 {
             let monitor_clone = monitor.clone();
             let handle = thread::spawn(move || {
@@ -685,7 +678,6 @@ mod tests {
         for handle in handles {
             handle.join().unwrap();
         }
-
         let monitor = monitor.lock().unwrap();
         let metrics = monitor.get_metrics();
         assert_eq!(metrics.total_instructions, 5);

@@ -4,8 +4,8 @@
 //! including performance monitoring, bytecode optimization, and error handling.
 
 use boa_engine::{
+    error::error_handling::{ErrorManager, ErrorSeverity, ErrorCategory, ErrorContext},
     Context, JsResult, Source,
-    error::error_handling::{ErrorCategory, ErrorContext, ErrorManager, ErrorSeverity},
     optimizer::{
         bytecode_optimizer::{BytecodeOptimizer, Instruction},
         performance::PerformanceMonitor,
@@ -82,7 +82,7 @@ fn demonstrate_bytecode_optimization(_context: &mut Context) -> JsResult<()> {
         Instruction::Add,
         Instruction::LoadConst { index: 0 }, // Duplicate - should be optimized
         Instruction::LoadConst { index: 1 }, // Duplicate - should be optimized
-        Instruction::Add,                    // Duplicate - should be optimized
+        Instruction::Add, // Duplicate - should be optimized
     ];
 
     println!("Original instructions: {}", instructions.len());
@@ -119,21 +119,9 @@ fn demonstrate_error_handling(_context: &mut Context) -> JsResult<()> {
 
     // Create and handle different types of errors
     let errors = vec![
-        (
-            ErrorSeverity::Warning,
-            ErrorCategory::Type,
-            "Type conversion warning",
-        ),
-        (
-            ErrorSeverity::Recoverable,
-            ErrorCategory::Memory,
-            "Memory allocation failed",
-        ),
-        (
-            ErrorSeverity::Info,
-            ErrorCategory::Runtime,
-            "Debug information",
-        ),
+        (ErrorSeverity::Warning, ErrorCategory::Type, "Type conversion warning"),
+        (ErrorSeverity::Recoverable, ErrorCategory::Memory, "Memory allocation failed"),
+        (ErrorSeverity::Info, ErrorCategory::Runtime, "Debug information"),
     ];
 
     for (severity, category, message) in errors {

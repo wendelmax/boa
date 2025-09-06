@@ -233,8 +233,11 @@ impl ConstantFoldingPass {
         }
 
         // Look for patterns like: LoadConst, LoadConst, Add
-        if let (Instruction::LoadConst { .. }, Instruction::LoadConst { .. }, Instruction::Add) =
-            (&instructions[0], &instructions[1], &instructions[2])
+        if let (
+            Instruction::LoadConst { .. },
+            Instruction::LoadConst { .. },
+            Instruction::Add,
+        ) = (&instructions[0], &instructions[1], &instructions[2])
         {
             // This is a simplified example - in reality, we'd need to track values
             return Some(FoldingResult {
@@ -742,7 +745,6 @@ mod tests {
         let inst = Instruction::LoadConst { index: 42 };
         let inst_copy = inst;
         let inst_clone = inst.clone();
-
         match (inst_copy, inst_clone) {
             (Instruction::LoadConst { index: i1 }, Instruction::LoadConst { index: i2 }) => {
                 assert_eq!(i1, 42);
@@ -804,7 +806,6 @@ mod tests {
     fn test_max_iterations_limit() {
         let mut optimizer = BytecodeOptimizer::new();
         optimizer.set_max_iterations(1);
-
         let mut instructions = vec![
             Instruction::LoadConst { index: 0 },
             Instruction::LoadConst { index: 1 },

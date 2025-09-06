@@ -384,7 +384,6 @@ impl JitCompiler {
             .get(&function_id)
             .ok_or("Function not compiled")?
             .clone();
-
         // Update execution count
         if let Some(f) = self.compiled_functions.get_mut(&function_id) {
             f.execution_count += 1;
@@ -407,8 +406,7 @@ impl JitCompiler {
         shaped_object: &mut ShapedObject,
     ) -> Result<(), String> {
         // Simulate property access with inline caching
-        for (_instruction_index, _instruction) in function.original_instructions.iter().enumerate()
-        {
+        for (_instruction_index, _instruction) in function.original_instructions.iter().enumerate() {
             // Simplified inline caching simulation
             let property_offset = self.resolve_property_offset(shaped_object.shape);
             self.execute_cached_property_access(property_offset);
@@ -585,17 +583,13 @@ mod tests {
         let instructions = vec![Instruction::LoadConst { index: 0 }];
 
         // Eager strategy should compile immediately
-        assert!(
-            eager_compiler
-                .maybe_compile_function(function_id, instructions.clone())
-                .is_some()
-        );
+        assert!(eager_compiler
+            .maybe_compile_function(function_id, instructions.clone())
+            .is_some());
 
         // Hot spot strategy should not compile without enough executions
-        assert!(
-            hot_spot_compiler
-                .maybe_compile_function(function_id, instructions)
-                .is_none()
-        );
+        assert!(hot_spot_compiler
+            .maybe_compile_function(function_id, instructions)
+            .is_none());
     }
 }
